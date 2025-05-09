@@ -26,3 +26,35 @@ let signInHandler = () => {
     message.style.display = "none";
   }, 2000);
 };
+
+// login with google
+const loginWithGoogleHandler = () => {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      var user = result.user;
+      console.log("user", user);
+    })
+    .catch((error) => {
+      var errorMessage = error.message;
+      console.log("errorMessage", errorMessage);
+    });
+};
+
+// login with facebook
+const loginWithFacebookHandler = () => {
+  var provider = new firebase.auth.FacebookAuthProvider();
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      var user = result.user;
+      console.log("user", user);
+    })
+    .catch((error) => {
+      var errorMessage = error.message;
+      console.log("errorMessage", errorMessage);
+    });
+};
