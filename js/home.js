@@ -21,6 +21,7 @@ const LogOut = () => {
 
 // add data
 const input = document.getElementById("input");
+const addBtn = document.getElementById("add-btn");
 function uuidv4() {
   return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
     (
@@ -31,6 +32,7 @@ function uuidv4() {
 }
 
 const addHandler = () => {
+  addBtn.value = "loading ...";
   // Ex : 1
   // firebase
   //   .database()
@@ -62,6 +64,7 @@ const addHandler = () => {
     })
     .then(() => {
       input.value = "";
+      addBtn.value = "Add";
     });
   // add update
 };
@@ -74,11 +77,44 @@ const addHandler = () => {
 //     console.log("res", res.val());
 //   });
 
+const loading = document.getElementById("loading");
+const list = document.getElementById("list");
 firebase
   .database()
-  .ref("users/")
+  .ref("todos/")
   .on("value", (res) => {
-    res.forEach((data) => {
-      console.log("data", data.val());
-    });
+    // value child_added
+    loading.style.display = "none";
+    list.style.display = "block";
+    list.innerHTML = "";
+    if (res.val()) {
+      res.forEach((data) => {
+        console.log("data", data.val());
+        const todoValue = document.createElement("p");
+        list.appendChild(todoValue);
+        todoValue.innerHTML = data.val().value;
+      });
+    } else {
+      const dataNotFound = document.createElement("p");
+      dataNotFound.innerHTML = "Data not Found!";
+      list.appendChild(dataNotFound);
+    }
   });
+
+// edit
+const editHandler = () => {
+  firebase
+    .database()
+    .ref("todos/" + "-OPzabteTysiefsJ2F_b")
+    .update({
+      value: "Update 2",
+    });
+};
+
+// delete
+const deleteHandler = () => {
+  firebase
+    .database()
+    .ref("todos/" + "-OPzabteTysiefsJ2F_b")
+    .remove();
+};

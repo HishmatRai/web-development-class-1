@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <script src="./../js/firebase-config.js"></script>
-</head>
-<body>
+    <style>
+      #loading {
+        display: block;
+      }
+      #list {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
     <h1>Home Page</h1>
     <button onclick="LogOut()">Log Out</button>
     <hr />
     <hr />
     <form onsubmit="addHandler();return false">
-        <input type="text" placeholder="Type ..." required id="input"/>
-        <input type="submit" value="Add"/>
+      <input type="text" placeholder="Type ..." required id="input" />
+      <input type="submit" value="Add" id="add-btn" />
     </form>
-</body>
-<script src="./../js/home.js"></script>
+    <hr />
+    <hr />
+    <img
+      src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif"
+      width="50"
+      id="loading"
+    />
+    <button onclick="editHandler()">Edit</button>
+    <button onclick="deleteHandler()">Delete</button>
+    <div id="list"></div>
+  </body>
+  <script src="./../js/home.js"></script>
 </html>
