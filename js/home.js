@@ -1,7 +1,8 @@
+let uid;
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     if (user.emailVerified) {
-      console.log("user", user);
+      uid = user.uid;
     } else {
       window.location.assign("email-verification.html");
     }
@@ -56,11 +57,16 @@ const addHandler = () => {
   //   });
 
   // Ex: 3
+  var addData = firebase.database().ref("todos/").push({
+    value: input.value,
+    createdAt: moment().format(),
+    uid: uid,
+  });
   firebase
     .database()
-    .ref("todos/")
-    .push({
-      value: input.value,
+    .ref("todos/" + addData.key)
+    .update({
+      key: addData.key,
     })
     .then(() => {
       input.value = "";
@@ -93,6 +99,37 @@ firebase
         const todoValue = document.createElement("p");
         list.appendChild(todoValue);
         todoValue.innerHTML = data.val().value;
+        // Date
+        const showDate = document.createElement("span");
+        todoValue.append(showDate);
+        showDate.innerHTML = moment(data.val().createdAt).fromNow();
+        if (data.val().uid === uid) {
+          // edit
+          const editBtn = document.createElement("button");
+          todoValue.appendChild(editBtn);
+          editBtn.innerHTML = "Edit";
+          // delete
+          const deleteBtn = document.createElement("button");
+          todoValue.appendChild(deleteBtn);
+          deleteBtn.innerHTML = "Delete";
+          // edit function
+          editBtn.addEventListener("click", () => {
+            var pro = prompt("Edit todo", data.val().value);
+            firebase
+              .database()
+              .ref("todos/" + data.val().key)
+              .update({
+                value: pro,
+              });
+          });
+          // delete function
+          deleteBtn.addEventListener("click", () => {
+            firebase
+              .database()
+              .ref("todos/" + data.val().key)
+              .remove();
+          });
+        }
       });
     } else {
       const dataNotFound = document.createElement("p");
@@ -102,19 +139,19 @@ firebase
   });
 
 // edit
-const editHandler = () => {
-  firebase
-    .database()
-    .ref("todos/" + "-OPzabteTysiefsJ2F_b")
-    .update({
-      value: "Update 2",
-    });
-};
+// const editHandler = () => {
+//   firebase
+//     .database()
+//     .ref("todos/" + "-OPzabteTysiefsJ2F_b")
+//     .update({
+//       value: "Update 2",
+//     });
+// };
 
-// delete
-const deleteHandler = () => {
-  firebase
-    .database()
-    .ref("todos/" + "-OPzabteTysiefsJ2F_b")
-    .remove();
-};
+// // delete
+// const deleteHandler = () => {
+//   firebase
+//     .database()
+//     .ref("todos/" + "-OPzabteTysiefsJ2F_b")
+//     .remove();
+// };
