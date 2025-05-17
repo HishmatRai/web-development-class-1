@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-storage.js"></script>
+    <script src="./../js/firebase-config.js"></script>
+    <style>
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Profile Page</h1>
+    <img
+      src="https://static.vecteezy.com/system/resources/previews/036/594/092/non_2x/man-empty-avatar-photo-placeholder-for-social-networks-resumes-forums-and-dating-sites-male-and-female-no-photo-images-for-unfilled-user-profile-free-vector.jpg"
+      id="profile-image"
+    />
+    <input type="file" onchange="uploadProfileImage(event)" accept="image/*" />
+    <hr />
+    <hr />
+    <form onsubmit="updateHandler();return false">
+      <input type="text" placeholder="Full Name" required id="full-name" />
+      <input type="number" placeholder="Phone Number" required id="phone" />
+      <input
+        type="email"
+        placeholder="Email"
+        required
+        id="email"
+        readonly
+        disabled
+      />
+      <input type="submit" value="Update" />
+    </form>
+  </body>
+  <script src="./../js/profile.js"></script>
+</html>

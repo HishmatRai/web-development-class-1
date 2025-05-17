@@ -13,9 +13,19 @@ let signUpHandler = () => {
         .then(() => {
           console.log("Res", res);
           console.log("User", res.user);
-          message.innerHTML = "Success!";
-          message.style.color = "green";
-          window.location.assign("./email-verification.html");
+          firebase
+            .database()
+            .ref("users/" + res.user.uid)
+            .set({
+              name: "ABC",
+              email: email.value,
+              phone: "03232323232",
+            })
+            .then(() => {
+              message.innerHTML = "Success!";
+              message.style.color = "green";
+              window.location.assign("./email-verification.html");
+            });
         });
     })
     .catch((error) => {
