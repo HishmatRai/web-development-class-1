@@ -1,6 +1,7 @@
 let uid;
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
+    console.log("user",user)
     if (user.emailVerified) {
       uid = user.uid;
     } else {

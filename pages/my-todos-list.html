@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>My Todos List</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
@@ -16,25 +16,15 @@
       #list {
         display: none;
       }
-      span{
+      span {
         margin: 0px 15px;
         border: 1px solid red;
       }
     </style>
   </head>
   <body>
-    <h1>Home Page</h1>
-    <a href="./profile.html">Profile</a>
-    <a href="./my-todos-list.html">My Todos</a>
-    <a href="./firestore-database.html">Firestore database</a>
-    <button onclick="LogOut()">Log Out</button>
-    <hr />
-    <hr />
-    <form onsubmit="addHandler();return false">
-      <input type="text" placeholder="Type ..." required id="input" />
-      <input type="submit" value="Add" id="add-btn" />
-    </form>
-    <hr />
+    <h1>My Todos List Page</h1>
+    
     <hr />
     <img
       src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif"
@@ -43,5 +33,5 @@
     />
     <div id="list"></div>
   </body>
-  <script src="./../js/home.js"></script>
+  <script src="./../js/my-todos-list.js"></script>
 </html>
